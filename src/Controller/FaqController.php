@@ -20,6 +20,7 @@ class FaqController
         $dataJSON = json_encode($tableauFaq);
         $file = '../public/asset/data.JSON';
         file_put_contents($file, $dataJSON);
+
         require '../templates/chatbotView.php';
     }
 }

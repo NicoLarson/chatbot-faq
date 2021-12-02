@@ -1,96 +1,98 @@
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 100vh;
-    background-color: #ecf0f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  background-color: #ecf0f1;
 }
 
 header h1 {
-    padding: 4rem;
-    text-align: center;
-    background-color: #2c3e50;
-    color: #fafafa;
-    text-transform: uppercase;
-    font-size: 4rem;
+  padding: 4rem;
+  text-align: center;
+  background-color: #2c3e50;
+  color: #fafafa;
+  text-transform: uppercase;
+  font-size: 4rem;
 }
 
 main {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 main fieldset {
-    padding: 2rem;
-    background-color: #fafafa;
-    border: .4rem solid #2c3e50;
-    border-radius: .2rem;
-
+  padding: 2rem;
+  background-color: #fafafa;
+  border: 0.4rem solid #2c3e50;
+  border-radius: 0.2rem;
+  max-height: 60vh;
 }
 
 main fieldset legend {
-    padding: .6rem 1rem;
-    font-size: 2.4rem;
-    background-color: #2c3e50;
-    color: #fafafa;
-    border-radius: .4rem;
+  padding: 0.6rem 1rem;
+  font-size: 2.4rem;
+  background-color: #2c3e50;
+  color: #fafafa;
+  border-radius: 0.4rem;
 }
-
+main fieldset div#conversation{
+    max-height: 40vh;
+    overflow: auto;
+}
 main fieldset div#conversation p {
-    display: flex;
-    flex-direction: column;
-    margin: 1rem 0;
-    padding: 1rem;
-    font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  padding: 1rem;
+  font-size: 1.6rem;
 }
 
 main fieldset div#conversation p.user-message {
-   
-    background-color: #ecf0f1;
+  background-color: #ecf0f1;
 }
 
 main fieldset div#conversation p.user-message span {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 main fieldset div#conversation p span.nom {
-    font-weight: bolder;
+  font-weight: bolder;
 }
 
-main fieldset div#conversation p:nth-child(2n+2) {
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bolder;
-    text-align: right;
-    background-color: #27ae60;
-    color: #fafafa;
+main fieldset div#conversation p:nth-child(2n + 2) {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bolder;
+  text-align: right;
+  background-color: #27ae60;
+  color: #fafafa;
 }
-main fieldset p#suggestion{
-    margin: 1rem 0;
-    padding: 1rem;
-    background-color: #f1c40f;
-    text-align: center;
-    font-size: 1.4rem;
+main fieldset p#suggestion {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #f1c40f;
+  text-align: center;
+  font-size: 1.4rem;
 }
 main fieldset form input,
 main fieldset form button {
-    padding: .2rem .6rem;
-    border: .1rem solid #2ecc71;
-    font-size: 1.6rem;
+  padding: 0.2rem 0.6rem;
+  border: 0.1rem solid #2ecc71;
+  font-size: 1.6rem;
 }
 
 main fieldset form button {
-    cursor: pointer;
-    background-color: #2ecc71;
+  cursor: pointer;
+  background-color: #2ecc71;
 }
 
 main fieldset form button i {
-    font-size: 1.6rem;
+  font-size: 1.6rem;
 }
 
 footer {
-    padding: 2rem;
-    background-color: #2c3e50;
-    color: #fafafa;
-    text-align: center;
-    font-size: 1.4rem;
+  padding: 2rem;
+  background-color: #2c3e50;
+  color: #fafafa;
+  text-align: center;
+  font-size: 1.4rem;
 }

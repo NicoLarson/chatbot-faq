@@ -2,8 +2,6 @@
 ob_start();
 ?>
 
-<?php
-var_dump($test) ?>
 <fieldset>
     <legend>Chatbot</legend>
     <div id="conversation">
