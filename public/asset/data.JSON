@@ -1,10 +1,14 @@
 [
-  { "question": "1 + 1", "reponse": "2" },
-  { "question": "Why ?", "reponse": "Because" },
-  { "question": "Test?", "reponse": "Oui" },
-  { "question": "Combien ?", "reponse": "46" },
-  { "question": "Combien de stage en combien de jour ?", "reponse": "46" },
-  { "question": "Combien de stage en combien de mois ?", "reponse": "46" },
-  { "question": "Combien de stage et pourquoi pas ?", "reponse": "46" },
-  { "question": "Etre salarier et en stage ?", "reponse": "46" }
+  {
+    "question": "Quelle est la d\u00e9finition d'un stage ?",
+    "reponse": "Un stage doit vous permettre d'acqu\u00e9rir des comp\u00e9tences professionnelles en lien avec votre formation. C'est une mise en situation temporaire en milieu professionnel au cours de laquelle on doit vous confier des missions conformes au projet p\u00e9dagogique \u00e9tabli avec votre \u00e9tablissement d'enseignement. Vous \u00eates accueilli et accompagn\u00e9 par un tuteur tout au long du stage. Il est garant du respect des objectifs p\u00e9dagogiques fix\u00e9s dans la convention de stage."
+  },
+  {
+    "question": "A contrario, qu'est-ce qui ne peut pas \u00eatre consid\u00e9r\u00e9 comme un stage ?",
+    "reponse": "Un stage ne doit pas \u00eatre propos\u00e9 \u00e0 un \u00e9tudiant pour...\r\n\r\n    remplacer un salari\u00e9 en cas d'absence, de suspension de son contrat de travail ou de licenciement\r\n    ex\u00e9cuter une t\u00e2che r\u00e9guli\u00e8re correspondant \u00e0 un poste de travail permanent\r\n    faire face \u00e0 un accroissement temporaire d'activit\u00e9\r\n    occuper un emploi saisonnier\r\n\r\nPourquoi ?\r\n\r\nParce que votre stage n'est pas un contrat de travail. Il doit correspondre \u00e0 un projet p\u00e9dagogique pr\u00e9cis, d\u00e9bouchant sur l'acquisition de comp\u00e9tences cibl\u00e9es. C'est pour cela que les stages \u00ab hors cursus p\u00e9dagogique \u00bb sont interdits.\r\n"
+  },
+  {
+    "question": "Comment et o\u00f9 trouver un stage ?",
+    "reponse": "Pendant la crise sanitaire, des offres sur le site 1jeune1solution.gouv.fr\r\n    Le Centre d'Information et de Documentation Jeunesse (CIDJ) propose offres et conseils\r\n    Certaines r\u00e9gions proposent \u00e9galement des offres sur leur site\r\n    Votre \u00e9tablissement, via son service d'aide \u00e0 l'insertion professionnelle, vous accompagnera dans votre recherche\r\n    Le site EURES, portail europ\u00e9en sur la mobilit\u00e9 de l'emploi, peut aussi \u00eatre une source d'offres de stages\r\n    Utilisez les r\u00e9seaux sociaux \u00e0 votre avantage pour trouver un stage ! Lire notre article sur le sujet\r\n\r\n"
+  }
 ]

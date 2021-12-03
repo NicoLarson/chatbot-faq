@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   const conversation = document.querySelector("#conversation");
-  let nom = document.querySelector("#nom");
-  const message = document.querySelector("#message");
-  const btnEnvoyer = document.querySelector("main fieldset form button");
+  let inputNom = document.querySelector("#nom");
+  const inputMessage = document.querySelector("#message");
+  const btnEnvoyerMessage = document.querySelector("main fieldset form button");
   let suggestionContent = document.querySelector("#suggestion");
-  let faq;
 
+  let faq; // JSON question réponse
+
+  let error = 0;
+  // AJAX
   const xmlhttp = new XMLHttpRequest();
   xmlhttp.onload = function () {
     const myFaq = JSON.parse(this.responseText);
@@ -14,35 +17,60 @@ document.addEventListener("DOMContentLoaded", () => {
   xmlhttp.open("GET", "./asset/data.JSON");
   xmlhttp.send();
 
-  btnEnvoyer.addEventListener("click", () => {
-    conversation.innerHTML += ` <p class="user-message"><span class="nom"><i class="fas fa-user"></i> ${nom.value}</span><span class="message">${message.value}</span></p>
-
-        <p class="bot-message"><span class="nom"><i class="fas fa-robot"></i> Mr.Robot</span> <span>Que voulez vous?</span> </p>`;
+  document.addEventListener('keydown', function (event) {
+    if (event.code == 'Enter') {
+      sendMessage(inputMessage.value)
+    }
   });
 
-  //TODO: Auto suggestion
-  // valider ou non un message suggéré
-  
-  // Un mot clée a plus de 4 charactères
-  let findKeyWord = (sentence) => {
-    let tab = sentence.split(" ");
-    for (let i = 0; i < tab.length; i++) {
-      if (tab[i].length < 4) {
-        tab.splice(i,1);
-      }
+  btnEnvoyerMessage.addEventListener('click', () => {
+    sendMessage(inputMessage.value)
+  })
+
+  let sendMessage = (message) => {
+    errorChecker()
+    if (error === 0) {
+      conversation.innerHTML += ` <p class="user-message"><span class="nom"><i class="fas fa-user"></i> ${nom.value}</span><span class="message">${message}</span></p>
+      `
+      robotResponse(message, faq)
     }
-    return tab;
-  };
+  }
 
-    // Match en fonction des mots clés
-let findQuestionsByKeyWords = (keyWords, questions) =>{
-return
-}
-  console.log(findQuestionsByKeyWords(['salaire','alert','stage'],['Comment trouver un bon salaire', 'Combien de stage et de salaire...', 'Me donner une alert quand je recois mon salaire .', 'salaire et stage']));
+  let robotResponse = (question, tableau) => {
+    let response
+    for (let i = 0; i < tableau.length; i++) {
+      question == tableau[i].question ? response = tableau[i].reponse : false
+    }
+    if (response == undefined) {
+      response = "Je ne comprend pas votre question."
+    }
+    conversation.innerHTML += `<p class="bot-message"><span class="nom"><i class="fas fa-robot"></i> Mr.Robot</span> <span>${response}</span> </p>`
+  }
 
-  let questionSuggestion = "";
+
+
+  let createLi = (text) => {
+    let item = document.createElement('li')
+    let paragraphe = document.createElement('p')
+    let icon = document.createElement('i')
+    icon.classList.add("far")
+    icon.classList.add("fa-comment-dots")
+    paragraphe.innerHTML = text
+    item.appendChild(paragraphe)
+    item.appendChild(icon)
+    icon.addEventListener('click', () => {
+      sendMessage(text)
+    })
+    suggestionContent.appendChild(item)
+  }
+
+
+
+
+
   message.addEventListener("keyup", () => {
     if (message.value != "") {
+      suggestionContent.innerHTML = "";
       for (let i = 0; i < faq.length; i++) {
         var questionMessage = faq[i].question;
         let regex = new RegExp(".*" + message.value + ".*", "i");
@@ -50,7 +78,7 @@ return
           for (let j = 0; j < faq.length; j++) {
             var questionMessage = faq[j].question;
             if (questionMessage.match(regex)) {
-              suggestionContent.innerHTML += questionMessage + "<br />";
+              createLi(questionMessage)
             }
           }
           break;
@@ -62,10 +90,52 @@ return
       suggestionContent.innerHTML = "";
     }
   });
+  //TODO: Auto suggestion
+  // valider ou non un message suggéré
+
+  // Un mot clée a plus de 4 charactères
+  let findKeyWord = (sentence) => {
+    let tab = sentence.split(" ");
+    for (let i = 0; i < tab.length; i++) {
+      if (tab[i].length < 4) {
+        tab.splice(i, 1);
+      }
+    }
+    return tab;
+  };
+
+  // Match en fonction des mots clés
+  let findQuestionsByKeyWords = (keyWords, questions) => {
+
+    return 0
+  }
+
+  console.log(findQuestionsByKeyWords(['salaire', 'alert', 'stage'], ['Comment trouver un bon salaire', 'Combien de stage et de salaire...', 'Me donner une alert quand je recois mon salaire .', 'salaire et stage']));
 
   //TODO: Gestion des erreurs
   // Contour rouge
   // Vide impossible
+
+  let errorChecker = () => {
+    if (inputNom.value == "") {
+      inputNom.className = "error"
+      error = 1
+    } else {
+      inputNom.className = ""
+      error = 0
+    }
+
+    if (inputMessage.value == "") {
+      inputMessage.className = "error"
+      error = 1
+    } else {
+      inputMessage.className = ""
+      error = 0
+    }
+  }
+
+
+
   //TODO: Reponse du robot
 
   //TODO: Simulation de typing (moment attente)

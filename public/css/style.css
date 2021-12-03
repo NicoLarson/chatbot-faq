@@ -25,7 +25,6 @@ main fieldset {
   background-color: #fafafa;
   border: 0.4rem solid #2c3e50;
   border-radius: 0.2rem;
-  max-height: 60vh;
 }
 
 main fieldset legend {
@@ -35,19 +34,22 @@ main fieldset legend {
   color: #fafafa;
   border-radius: 0.4rem;
 }
-main fieldset div#conversation{
-    max-height: 40vh;
-    overflow: auto;
+
+main fieldset div#conversation {
+  max-height: 40vh;
+  overflow: auto;
 }
+
 main fieldset div#conversation p {
   display: flex;
   flex-direction: column;
   margin: 1rem 0;
   padding: 1rem;
   font-size: 1.6rem;
+  line-height: 2.4rem;
 }
 
-main fieldset div#conversation p.user-message {
+main fieldset div#conversation p.user-message span:nth-child(2) {
   background-color: #ecf0f1;
 }
 
@@ -59,28 +61,53 @@ main fieldset div#conversation p span.nom {
   font-weight: bolder;
 }
 
-main fieldset div#conversation p:nth-child(2n + 2) {
+main fieldset div#conversation p span:nth-child(2) {
+  border-radius: 0 1rem 1rem 1rem;
+  padding: 2rem;
+  max-width: 80%;
+}
+
+main fieldset div#conversation p:nth-child(2n + 2) span:nth-child(1) {
+  text-align: right;
+}
+
+main fieldset div#conversation p:nth-child(2n + 2) span:nth-child(2) {
+  border-radius: 1rem 0 1rem 1rem;
   font-family: "Courier New", Courier, monospace;
   font-weight: bolder;
   text-align: right;
   background-color: #27ae60;
   color: #fafafa;
 }
-main fieldset p#suggestion {
+
+main fieldset ul#suggestion {
   margin: 1rem 0;
   padding: 1rem;
   background-color: #f1c40f;
   text-align: center;
   font-size: 1.4rem;
 }
+
+main fieldset ul#suggestion li {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+main fieldset ul#suggestion li i {
+  margin: 0 0 0 2rem;
+}
+
 main fieldset form input,
-main fieldset form button {
+main fieldset form button,
+main fieldset ul#suggestion li i {
   padding: 0.2rem 0.6rem;
   border: 0.1rem solid #2ecc71;
   font-size: 1.6rem;
 }
 
-main fieldset form button {
+main fieldset form button,
+main fieldset ul#suggestion li i {
   cursor: pointer;
   background-color: #2ecc71;
 }
@@ -95,4 +122,8 @@ footer {
   color: #fafafa;
   text-align: center;
   font-size: 1.4rem;
+}
+
+input.error {
+  border: solid .1rem #e74c3c;
 }
