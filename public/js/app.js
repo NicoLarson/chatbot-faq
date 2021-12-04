@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let faq; // JSON question réponse
 
   let error = 0;
+
   // AJAX
   const xmlhttp = new XMLHttpRequest();
   xmlhttp.onload = function () {
@@ -34,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
       `
       robotResponse(message, faq)
     }
+    document.querySelector("#conversation p:last-child").scrollIntoView()
+
   }
 
   let robotResponse = (question, tableau) => {
@@ -47,8 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     conversation.innerHTML += `<p class="bot-message"><span class="nom"><i class="fas fa-robot"></i> Mr.Robot</span> <span>${response}</span> </p>`
   }
 
-
-
   let createLi = (text) => {
     let item = document.createElement('li')
     let paragraphe = document.createElement('p')
@@ -60,61 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
     item.appendChild(icon)
     icon.addEventListener('click', () => {
       sendMessage(text)
+      message.value = ""
+      suggestionContent.innerHTML = ""
     })
     suggestionContent.appendChild(item)
   }
 
-
-
-
-
+  
   message.addEventListener("keyup", () => {
-    if (message.value != "") {
-      suggestionContent.innerHTML = "";
-      for (let i = 0; i < faq.length; i++) {
-        var questionMessage = faq[i].question;
-        let regex = new RegExp(".*" + message.value + ".*", "i");
-        if (questionMessage.match(regex)) {
-          for (let j = 0; j < faq.length; j++) {
-            var questionMessage = faq[j].question;
-            if (questionMessage.match(regex)) {
-              createLi(questionMessage)
-            }
-          }
-          break;
-        } else {
-          suggestionContent.innerHTML = "";
-        }
-      }
-    } else {
-      suggestionContent.innerHTML = "";
-    }
+    suggestionContent.innerHTML = ""
+    let keywordsTab = findKeyWords(message.value)
+    findQuestionsByKeyWords(keywordsTab, faq)
+
   });
-  //TODO: Auto suggestion
-  // valider ou non un message suggéré
-
-  // Un mot clée a plus de 4 charactères
-  let findKeyWord = (sentence) => {
-    let tab = sentence.split(" ");
-    for (let i = 0; i < tab.length; i++) {
-      if (tab[i].length < 4) {
-        tab.splice(i, 1);
-      }
-    }
-    return tab;
-  };
-
-  // Match en fonction des mots clés
-  let findQuestionsByKeyWords = (keyWords, questions) => {
-
-    return 0
-  }
-
-  console.log(findQuestionsByKeyWords(['salaire', 'alert', 'stage'], ['Comment trouver un bon salaire', 'Combien de stage et de salaire...', 'Me donner une alert quand je recois mon salaire .', 'salaire et stage']));
-
-  //TODO: Gestion des erreurs
-  // Contour rouge
-  // Vide impossible
 
   let errorChecker = () => {
     if (inputNom.value == "") {
@@ -136,8 +95,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  //TODO: Reponse du robot
+  let findKeyWords = (sentence) => {
+    let tab = sentence.split(" ");
+    for (let i = 0; i < tab.length; i++) {
+      if (tab[i].length < 4) {
+        tab.splice(i, 1);
+      }
+    }
+    return tab;
+  };
+
+  // Match en fonction des mots clés
+  let findQuestionsByKeyWords = (keyWords, faq) => {
+    for (let i = 0; i < keyWords.length; i++) {
+      let regex = new RegExp(".*" + keyWords[i] + ".*", "i");
+      for (let j = 0; j < faq.length; j++) {
+        if (faq[j].question.match(regex)) {
+          createLi(faq[j].question)
+          console.log(keyWords[i] + ": " + faq[j].question)
+        }
+      }
+    }
+  }
 
   //TODO: Simulation de typing (moment attente)
   // Apres ajout d'un message
 });
+
+
+
+    // if (message.value != "") {
+    //   suggestionContent.innerHTML = "";
+    //   for (let i = 0; i < faq.length; i++) {
+    //     var questionMessage = faq[i].question;
+    //     let regex = new RegExp(".*" + message.value + ".*", "i");
+    //     if (questionMessage.match(regex)) {
+    //       for (let j = 0; j < faq.length; j++) {
+    //         var questionMessage = faq[j].question;
+    //         if (questionMessage.match(regex)) {
+    //           createLi(questionMessage)
+    //         }
+    //       }
+    //       break;
+    //     } else {
+    //       suggestionContent.innerHTML = "";
+    //     }
+    //   }
+    // } else {
+    //   suggestionContent.innerHTML = "";
+    // }

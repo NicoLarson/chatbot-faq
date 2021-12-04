@@ -35,8 +35,22 @@ main fieldset legend {
   border-radius: 0.4rem;
 }
 
+main fieldset form input,
+main fieldset form button,
+main fieldset ul#suggestion li i {
+  padding: 0.2rem 0.6rem;
+  border: 0.1rem solid #2ecc71;
+  font-size: 1.6rem;
+}
+
+main fieldset form button,
+main fieldset ul#suggestion li i {
+  cursor: pointer;
+  background-color: #2ecc71;
+}
 main fieldset div#conversation {
   max-height: 40vh;
+  max-width: 40vw;
   overflow: auto;
 }
 
@@ -62,6 +76,7 @@ main fieldset div#conversation p span.nom {
 }
 
 main fieldset div#conversation p span:nth-child(2) {
+  margin: 1rem auto 0 2rem;
   border-radius: 0 1rem 1rem 1rem;
   padding: 2rem;
   max-width: 80%;
@@ -72,10 +87,10 @@ main fieldset div#conversation p:nth-child(2n + 2) span:nth-child(1) {
 }
 
 main fieldset div#conversation p:nth-child(2n + 2) span:nth-child(2) {
+  margin: 1rem 2rem 0 auto;
   border-radius: 1rem 0 1rem 1rem;
   font-family: "Courier New", Courier, monospace;
   font-weight: bolder;
-  text-align: right;
   background-color: #27ae60;
   color: #fafafa;
 }
@@ -91,26 +106,18 @@ main fieldset ul#suggestion {
 main fieldset ul#suggestion li {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem;
 }
-
+main fieldset ul#suggestion li p {
+  text-align: left;
+}
 main fieldset ul#suggestion li i {
   margin: 0 0 0 2rem;
+  padding: 1rem 2rem;
+  font-size: 2rem;
 }
 
-main fieldset form input,
-main fieldset form button,
-main fieldset ul#suggestion li i {
-  padding: 0.2rem 0.6rem;
-  border: 0.1rem solid #2ecc71;
-  font-size: 1.6rem;
-}
-
-main fieldset form button,
-main fieldset ul#suggestion li i {
-  cursor: pointer;
-  background-color: #2ecc71;
-}
 
 main fieldset form button i {
   font-size: 1.6rem;
