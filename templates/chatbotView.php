@@ -4,10 +4,9 @@ ob_start();
 
 <fieldset>
     <legend>Chatbot</legend>
-    <div id="conversation">
-    </div>
+    <div id="conversation"></div>
     <br />
-    <p id="suggestion"></p>
+    <ul id="suggestion"></ul>
     <form action="#" method="post" id="conv">
         <input type="text" name="nom" id="nom" size="6" placeholder="Nom">
         <input type="text" name="message" id="message" size="27" placeholder="Message">

@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   const conversation = document.querySelector("#conversation");
-  let inputNom = document.querySelector("#nom");
+  const inputNom = document.querySelector("#nom");
   const inputMessage = document.querySelector("#message");
   const btnEnvoyerMessage = document.querySelector("main fieldset form button");
-  let suggestionContent = document.querySelector("#suggestion");
+  const suggestionContent = document.querySelector("#suggestion");
 
-  let faq; // JSON question réponse
+  let faq;
 
   let error = 0;
 
@@ -13,27 +14,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const xmlhttp = new XMLHttpRequest();
   xmlhttp.onload = function () {
     const myFaq = JSON.parse(this.responseText);
+    // Récupération des données du fichier data.JSON dans faq
     faq = myFaq;
   };
   xmlhttp.open("GET", "./asset/data.JSON");
   xmlhttp.send();
 
-  document.addEventListener('keydown', function (event) {
-    if (event.code == 'Enter') {
-      sendMessage(inputMessage.value)
-    }
-  });
-
-  btnEnvoyerMessage.addEventListener('click', () => {
-    sendMessage(inputMessage.value)
-  })
 
   let sendMessage = (message) => {
     errorChecker()
     if (error === 0) {
       conversation.innerHTML += ` <p class="user-message"><span class="nom"><i class="fas fa-user"></i> ${nom.value}</span><span class="message">${message}</span></p>
       `
+      //TODO: Simulation de typing (moment attente)
       robotResponse(message, faq)
+
     }
     document.querySelector("#conversation p:last-child").scrollIntoView()
 
@@ -67,38 +62,34 @@ document.addEventListener("DOMContentLoaded", () => {
     suggestionContent.appendChild(item)
   }
 
-  
-  message.addEventListener("keyup", () => {
-    suggestionContent.innerHTML = ""
-    let keywordsTab = findKeyWords(message.value)
-    findQuestionsByKeyWords(keywordsTab, faq)
-
-  });
 
   let errorChecker = () => {
-    if (inputNom.value == "") {
-      inputNom.className = "error"
-      error = 1
+    if (inputNom.value == "" || inputMessage.value == "") {
+      if (inputNom.value == "") {
+        inputNom.className = "error"
+        error = 1
+      } else {
+        inputNom.className = ""
+      }
+
+      if (inputMessage.value == "") {
+        inputMessage.className = "error"
+        error = 1
+      } else {
+        inputMessage.className = ""
+      }
     } else {
       inputNom.className = ""
-      error = 0
-    }
-
-    if (inputMessage.value == "") {
-      inputMessage.className = "error"
-      error = 1
-    } else {
       inputMessage.className = ""
       error = 0
     }
+
   }
-
-
 
   let findKeyWords = (sentence) => {
     let tab = sentence.split(" ");
     for (let i = 0; i < tab.length; i++) {
-      if (tab[i].length < 4) {
+      if (tab[i].length < 5) {
         tab.splice(i, 1);
       }
     }
@@ -118,29 +109,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  //TODO: Simulation de typing (moment attente)
-  // Apres ajout d'un message
+  document.addEventListener('keydown', function (event) {
+    if (event.code == 'Enter') {
+      sendMessage(inputMessage.value)
+    }
+  });
+
+  btnEnvoyerMessage.addEventListener('click', () => {
+    sendMessage(inputMessage.value)
+  })
+
+  message.addEventListener("keyup", () => {
+    suggestionContent.innerHTML = ""
+    let keywordsTab = findKeyWords(message.value)
+    findQuestionsByKeyWords(keywordsTab, faq)
+
+  });
+
 });
-
-
-
-    // if (message.value != "") {
-    //   suggestionContent.innerHTML = "";
-    //   for (let i = 0; i < faq.length; i++) {
-    //     var questionMessage = faq[i].question;
-    //     let regex = new RegExp(".*" + message.value + ".*", "i");
-    //     if (questionMessage.match(regex)) {
-    //       for (let j = 0; j < faq.length; j++) {
-    //         var questionMessage = faq[j].question;
-    //         if (questionMessage.match(regex)) {
-    //           createLi(questionMessage)
-    //         }
-    //       }
-    //       break;
-    //     } else {
-    //       suggestionContent.innerHTML = "";
-    //     }
-    //   }
-    // } else {
-    //   suggestionContent.innerHTML = "";
-    // }

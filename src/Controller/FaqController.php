@@ -9,7 +9,11 @@ class FaqController
     {
         $db = new Manager;
         $tableauFaq = [];
+
+        // Récupération des données
         $response = $db->selectQuestionResponse();
+
+        // Conversion de données en objets
         while ($data = $response->fetch()) {
             $faq = new Faq;
             $faq->question = $data['f_question'];
@@ -17,7 +21,10 @@ class FaqController
             array_push($tableauFaq, $faq);
         }
 
+        // Conversion de tableau d'objets en JSON
         $dataJSON = json_encode($tableauFaq);
+
+        // Écriture dans le fichier data.JSON
         $file = '../public/asset/data.JSON';
         file_put_contents($file, $dataJSON);
 
